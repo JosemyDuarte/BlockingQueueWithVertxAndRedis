@@ -9,12 +9,16 @@ public class Listener extends AbstractVerticle {
     }
 
     @Override
-    public void start(){
+    public void start() {
         RedisOptions config = new RedisOptions()
                 .setHost("127.0.0.1");
 
         RedisClient redis = RedisClient.create(vertx, config);
-        redis.blpop("reddit",3600, System.out::println);
+
+        vertx.setPeriodic(1000, t ->
+                redis.blpop("myKey", 3500, System.out::println)
+        );
+
 
     }
 
