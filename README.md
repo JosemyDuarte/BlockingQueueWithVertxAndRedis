@@ -10,6 +10,6 @@ First you'll need a Redis instance running. If you have Docker, just run:
 docker run -it --rm -p 6379:6379  --name redis redis
 ```
 
-After that, you just have to run *Listener*, *Listener2* and *Publisher*. 
+After that, you just have to run *Listener* and *Publisher*. 
 
-*Listener* classes will continue to wait for messages all the time. *Publisher* will publish a message that will be received by the first *listener* that has been executed, and if you run *Publisher* one more time, this time the message will be received by the other *listener*, and so on.
+*Listener* class will register 2 listeners that will wait for messages all the time. *Publisher* will publish a message that will be received by the *first listener*, and if you run *Publisher* one more time, this time the message will be received by the *second listener*, and so on, like a Round Robin.

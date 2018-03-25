@@ -15,7 +15,7 @@ public class Publisher extends AbstractVerticle {
 
         RedisClient client = RedisClient.create(vertx, config);
 
-        client.lpush("reddit", "Josemy", r -> {
+        client.lpush("myKey", "Josemy", r -> {
             if (r.succeeded()) {
                 System.out.println("key stored");
             } else {

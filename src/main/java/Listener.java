@@ -16,7 +16,15 @@ public class Listener extends AbstractVerticle {
         RedisClient redis = RedisClient.create(vertx, config);
 
         vertx.setPeriodic(1000, t ->
-                redis.blpop("myKey", 3500, System.out::println)
+                redis.blpop("myKey", 3500, message -> {
+                    System.out.println("[FirstListener] -> " + message);
+                })
+        );
+
+        vertx.setPeriodic(1000, t ->
+                redis.blpop("myKey", 3500, message -> {
+                    System.out.println("[SecondListener] -> " + message);
+                })
         );
 
 
